@@ -1,24 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react'
+import { Routes, Route, Link } from 'react-router-dom'
+import Main from './components/Main';
+import ShowOne from './components/ShowOne';
+import Update from './components/Update';
 
 function App() {
+
+  // state var for the db stuff
+  const [products, setProducts] = useState([])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <fieldset>
+      <div className="App">
+        {/* heroes = {JSON.stringify(heroes)} */}
+        {/* <Form/> */}
+
+        {/* =========== SETUP THEATER STAGE ============ */}
+        <Routes>
+
+          {/* SHOW ALL and CREATE */}
+          <Route path='/' element={
+            <Main products={products} setProducts={setProducts} />
+          } />
+
+          {/* EDIT */}
+          <Route path='/products/:id/edit' element={<Update/>} />
+
+          {/* READ ONE */}
+          <Route path='/products/:id' element={<ShowOne/>} />
+
+
+        </Routes>
+
+
+      </div>
+    </fieldset>
   );
 }
 
